@@ -7,13 +7,12 @@ fn main() -> io::Result<()> {
     args.next();
 
     let path = args.next().expect("Please provide a path");
-    let path = Path::new(&path);
-
     if path.ends_with("/") {
         fs::create_dir_all(path)?;
         return Ok(())
     }
 
+    let path = Path::new(&path);
     if let Some(dirname) = Path::new(&path).parent() {
         fs::create_dir_all(dirname)?;
     }
